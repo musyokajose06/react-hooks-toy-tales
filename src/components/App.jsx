@@ -21,14 +21,22 @@ function App() {
     setShowForm((showForm) => !showForm);
   }
 
+  function handleAddToy(newToy) {
+    setToys((currentToys) => [...currentToys, newToy]);
+  }
+
+  function handleDeleteToy(id) {
+    setToys((currentToys) => currentToys.filter((toy) => toy.id !== id));
+  }
+
   return (
     <>
       <Header />
-      {showForm ? <ToyForm /> : null}
+      {showForm ? <ToyForm onAddToy={handleAddToy} /> : null}
       <div className="buttonContainer">
         <button onClick={handleClick}>Add a Toy</button>
       </div>
-      <ToyContainer toys={toys} />
+      <ToyContainer toys={toys} onDeleteToy={handleDeleteToy} />
     </>
   );
 }
